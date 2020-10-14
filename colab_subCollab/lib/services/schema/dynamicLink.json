@@ -1,0 +1,11 @@
+{
+    "dynamicLinkInfo" : {
+      "domainUriPrefix" : "https://anirudh99.page.link",
+      "link" : "",
+      "androidInfo" : {
+        "androidPackageName" : "com.anirudh.flutter_chat"
+    }},
+    "suffix" : {
+      "option" : "UNGUESSABLE" 
+      }
+  }
