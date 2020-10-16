@@ -1,13 +1,25 @@
 import 'dart:ui';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class collab_5 extends StatefulWidget {
+class collab_5 extends StatelessWidget{
+  Widget build(BuildContext context){
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: collab_5Stateful(),
+    );
+  }
+}
+class collab_5Stateful extends StatefulWidget {
   @override
   _collab_5State createState() => _collab_5State();
 }
 
-class _collab_5State extends State<collab_5> {
+class _collab_5State extends State<collab_5Stateful> {
+  final _textController = TextEditingController();
+
   List<BottomNavigationBarItem> navitems = [
     BottomNavigationBarItem(
       icon: SvgPicture.asset("assets/images/Path.svg"),
@@ -42,7 +54,7 @@ class _collab_5State extends State<collab_5> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CC5(),
+      body: CC5(context, _textController, MediaQuery.of(context).size),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -66,13 +78,7 @@ class _collab_5State extends State<collab_5> {
   }
 }
 
-class CC5 extends StatelessWidget {
-  const CC5({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget CC5(BuildContext context,TextEditingController _textEditingController,Size size) {
     List data = [
       {
         "title": "Yokesh Mithoon (You)",
@@ -124,7 +130,6 @@ class CC5 extends StatelessWidget {
       },
     ];
 
-    var size = MediaQuery.of(context).size;
     return Container(
       height: size.height,
       width: size.width,
@@ -238,7 +243,10 @@ class CC5 extends StatelessWidget {
                                 height: 23.59,
                                 child: RaisedButton(
                                   color: Color(0xff0F4C81),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    sendEmail(_textEditingController.text);
+                                    _textEditingController.clear();
+                                  },
                                   child: Text("Add",
                                       style: TextStyle(
                                           color: Colors.white,
@@ -252,6 +260,7 @@ class CC5 extends StatelessWidget {
                               child: Container(
                                 width: 229.74,
                                 child: TextField(
+                                  controller: _textEditingController,
                                   decoration: InputDecoration(
                                       hintText:
                                           "   Enter E-mail address and click on Add",
@@ -389,4 +398,19 @@ class CC5 extends StatelessWidget {
       ),
     );
   }
+
+void sendEmail(String email) async {
+  var httpClient = http.Client();
+  var response = await httpClient.post(
+      Uri.https("projectcollab-invite.herokuapp.com", "/inviteProjectCollab"),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jsonEncode(
+          {"email": email, "projectID": 007, "route": "/viewRequest_2"}));
+  if (response.statusCode == 200) {
+    var message = jsonDecode(response.body);
+    print(message['message']);
+  } else
+    print("Error with code ${response.statusCode}");
 }
