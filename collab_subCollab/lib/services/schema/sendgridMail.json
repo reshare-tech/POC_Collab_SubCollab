@@ -1,0 +1,17 @@
+{
+    "from" : {
+      "email" : "anican047@gmail.com",
+      "name" : "ReSHARE"
+    },
+    "subject" : "Invitation to join ReSHARE",
+    "personalizations" : [{
+        "to" : [{
+          "email" : ""
+        }],
+        "dynamic_template_data" :{
+          "link" : "",
+          "projectid" : ""
+        }
+      }],
+    "template_id" : "d-453384df26384a67b2b0b27c0b94fd3f"
+  }
