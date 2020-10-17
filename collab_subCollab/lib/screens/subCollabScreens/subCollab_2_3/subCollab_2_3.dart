@@ -55,7 +55,7 @@ class _SubCollab_2_3State extends State<SubCollab_2_3> {
                           Icons.arrow_back_ios,
                           color: Color(0xfffdfdfd),
                         ),
-                        onPressed: null)),
+                        onPressed: () => Navigator.pop(context))),
                 Positioned(
                     top: 50,
                     left: 43,
@@ -79,7 +79,8 @@ class _SubCollab_2_3State extends State<SubCollab_2_3> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(4))),
                         child: RaisedButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              Navigator.pushNamed(context, "/collab_5"),
                           child: Text(
                             "Next",
                             style: TextStyle(fontSize: 12),

@@ -36,7 +36,7 @@ class _SubCollab_6State extends State<SubCollab_6> {
                           size: 15.37,
                           color: Color(0xfffdfdfd),
                         ),
-                        onPressed: () {}),
+                        onPressed: () => Navigator.pop(context)),
                     top: 44,
                     left: 16,
                   ),
@@ -141,7 +141,8 @@ class _SubCollab_6State extends State<SubCollab_6> {
                           style:
                               TextStyle(fontSize: 15, color: Color(0xfffdfdfd)),
                         ),
-                        onPressed: () {},
+                        onPressed: () =>
+                            Navigator.pushNamed(context, "/subCollab_7"),
                         color: Color(0xff48A1FF),
                       ),
                     ),

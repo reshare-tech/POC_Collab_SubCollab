@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Collab_2_3 extends StatefulWidget {
+class collab_2_3 extends StatefulWidget {
   @override
-  _Collab_2_3State createState() => _Collab_2_3State();
+  _collab_2_3State createState() => _collab_2_3State();
 }
 
-class _Collab_2_3State extends State<Collab_2_3> {
+class _collab_2_3State extends State<collab_2_3> {
   int index1 = 0;
   int index2 = 0;
   @override
@@ -72,7 +72,8 @@ class _Collab_2_3State extends State<Collab_2_3> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(4))),
                         child: RaisedButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              {Navigator.pushNamed(context, "/collab_6")},
                           child: Text(
                             "Next",
                             style: TextStyle(fontSize: 12),

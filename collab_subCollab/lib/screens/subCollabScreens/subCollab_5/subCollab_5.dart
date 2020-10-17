@@ -202,7 +202,7 @@ class _Subcollab_5State extends State<Subcollab_5> {
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(4)),
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, "/subCollab_6"),
                   color: Color(0xff44B887),
                   child: Text(
                     "Next",

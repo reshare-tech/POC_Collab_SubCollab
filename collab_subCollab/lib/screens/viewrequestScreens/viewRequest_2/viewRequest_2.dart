@@ -81,7 +81,7 @@ class _ViewRequest_2State extends State<ViewRequest_2> {
                           size: 15.37,
                           color: Color(0xfffdfdfd),
                         ),
-                        onPressed: () {}),
+                        onPressed: () => Navigator.pop(context)),
                     top: 44,
                     left: 16,
                   ),
@@ -225,6 +225,7 @@ class _ViewRequest_2State extends State<ViewRequest_2> {
                         ),
                         Expanded(
                             child: ListView.separated(
+                          padding: EdgeInsets.all(0),
                           controller: scrollController,
                           separatorBuilder: (context, index) => Divider(
                             thickness: 0.01,
