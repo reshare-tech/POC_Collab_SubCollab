@@ -200,13 +200,13 @@ class CC6 extends StatelessWidget {
                                       color: Color(0xff3e73c1),
                                       borderRadius: BorderRadius.circular(5)),
                                   child: IconButton(
-                                    icon: SvgPicture.asset(
-                                      "assets/images/Vector123.svg",
-                                      width: 18,
-                                      height: 24,
-                                    ),
-                                    onPressed: () {},
-                                  ),
+                                      icon: SvgPicture.asset(
+                                        "assets/images/Vector123.svg",
+                                        width: 18,
+                                        height: 24,
+                                      ),
+                                      onPressed: () => Navigator.pushNamed(
+                                          context, "/subCollab_2_3")),
                                 ),
                                 Text(
                                   "Create",
@@ -238,7 +238,8 @@ class CC6 extends StatelessWidget {
                                       width: 18,
                                       height: 24,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () => Navigator.pushNamed(
+                                        context, "/viewRequest_1"),
                                   ),
                                 ),
                                 Text("View",
@@ -269,7 +270,8 @@ class CC6 extends StatelessWidget {
                                       width: 18,
                                       height: 24,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () => Navigator.pushNamed(
+                                        context, "/collab_7"),
                                   ),
                                 ),
                                 Text("View",

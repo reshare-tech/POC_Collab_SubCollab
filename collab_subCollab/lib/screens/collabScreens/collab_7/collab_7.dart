@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SubCollab_7 extends StatefulWidget {
-  SubCollab_7({Key key, this.title}) : super(key: key);
+class Collab_7 extends StatefulWidget {
+  Collab_7({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _SubCollab_7State createState() => _SubCollab_7State();
+  _Collab_7State createState() => _Collab_7State();
 }
 
-class _SubCollab_7State extends State<SubCollab_7> {
+class _Collab_7State extends State<Collab_7> {
   @override
   Widget build(BuildContext context) {
     List data = [
@@ -69,79 +69,73 @@ class _SubCollab_7State extends State<SubCollab_7> {
     return Scaffold(
       extendBody: true,
       body: Stack(
+        overflow: Overflow.visible,
         children: [
           Container(
-            constraints: BoxConstraints.expand(
-                height: height - kBottomNavigationBarHeight),
-            decoration: BoxDecoration(color: Color(0xff3E73C1)),
-            child: Stack(
-              children: [
-                Positioned(
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        size: 15.37,
-                        color: Color(0xfffdfdfd),
-                      ),
-                      onPressed: () => Navigator.pop(context)),
-                  top: 44,
-                  left: 16,
-                ),
-                Positioned(
-                  child: IconButton(
+            height: 300,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Color(0xff0659ac), Color(0xff179ee6)],
+                    stops: [0.26, 1])),
+            padding: EdgeInsets.only(left: 20, right: 0, top: 16),
+            child: ListTile(
+              trailing: Container(
+                width: 100,
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
                       icon: SvgPicture.asset(
                         "assets/images/search.svg",
-                        color: Color(0xfffdfdfd),
+                        height: 20,
+                        width: 20,
                       ),
-                      onPressed: () {}),
-                  top: 44,
-                  right: 40,
-                ),
-                Positioned(
-                  child: IconButton(
+                      onPressed: () {},
+                    ),
+                    IconButton(
                       icon: Icon(
                         Icons.more_vert,
-                        color: Color(0xfffdfdfd),
+                        color: Colors.white,
                       ),
-                      onPressed: () {}),
-                  top: 44,
-                  right: 0,
+                      iconSize: 30,
+                      onPressed: () {},
+                    ),
+                  ],
                 ),
-                Positioned(
-                  child: Container(
-                      child: Image.asset(
-                        "assets/images/head.jpg",
-                        fit: BoxFit.fitWidth,
+              ),
+              title: Transform(
+                transform: Matrix4.translationValues(-30, 0, 0),
+                child: Text(
+                  "Flutter Project",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              contentPadding:
+                  EdgeInsets.only(top: 22, bottom: 0, left: 0, right: 0),
+              leading: Container(
+                width: 100,
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        padding: EdgeInsets.only(right: 20),
+                        icon: SvgPicture.asset("assets/images/Arrow.svg")),
+                    Transform(
+                      transform: Matrix4.translationValues(-15, 0, 0),
+                      child: Container(
+                        margin: EdgeInsets.only(left: 0),
+                        width: 40,
+                        height: 40,
+                        child: Image.asset("assets/images/Rectangle 75.png"),
                       ),
-                      constraints: BoxConstraints.expand(height: 40, width: 40),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)))),
-                  top: 45,
-                  left: 55,
+                    )
+                  ],
                 ),
-                Positioned(
-                  child: Text(
-                    "Dart",
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xfffdfdfd)),
-                  ),
-                  left: 100,
-                  top: 45,
-                ),
-                Positioned(
-                  child: Text(
-                    "in “Face Detection project”",
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xfffdfdfd)),
-                  ),
-                  left: 100,
-                  top: 70,
-                )
-              ],
+              ),
             ),
           ),
           Positioned(

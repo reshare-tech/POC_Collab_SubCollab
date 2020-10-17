@@ -329,7 +329,7 @@ class _TileState extends State<Tile> {
           Expanded(
             flex: 3,
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () => Navigator.pushNamed(context, "/viewRequest_2"),
               child: Text(
                 "View Details",
                 style: TextStyle(color: Color(0xff48a1ff), fontSize: 12),
