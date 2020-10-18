@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ViewRequest_2 extends StatefulWidget {
   ViewRequest_2({Key key, this.title}) : super(key: key);
@@ -326,7 +327,17 @@ class _ViewRequest_2State extends State<ViewRequest_2> {
                                 fontWeight: FontWeight.w600,
                                 color: Color(0xfffdfdfd)),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/subCollab_1");
+                            Fluttertoast.showToast(
+                                backgroundColor: Color(0xff48A1FF),
+                                msg: "You've been added",
+                                fontSize: 12,
+                                textColor: Colors.white,
+                                timeInSecForIosWeb: 1,
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM);
+                          },
                           color: Color(0xff48A1FF),
                         ),
                       ),
@@ -349,7 +360,17 @@ class _ViewRequest_2State extends State<ViewRequest_2> {
                                 fontWeight: FontWeight.w600,
                                 color: Color(0xff48A1FF)),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/subCollab_1");
+                            Fluttertoast.showToast(
+                                backgroundColor: Colors.white,
+                                msg: "You've declined",
+                                fontSize: 12,
+                                textColor: Color(0xff48A1FF),
+                                timeInSecForIosWeb: 1,
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM);
+                          },
                         ),
                       ),
                       top: 36.5,
