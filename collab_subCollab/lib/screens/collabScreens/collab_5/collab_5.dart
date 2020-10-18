@@ -397,7 +397,7 @@ void sendEmail(String email, BuildContext context) async {
         "Content-Type": "application/json",
       },
       body: jsonEncode(
-          {"email": email, "projectID": 007, "route": "viewRequest"}));
+          {"email": email, "projectID": 007, "route": "/viewRequest_2"}));
   if (response.statusCode == 200) {
     var message = jsonDecode(response.body);
     print(message['message']);
