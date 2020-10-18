@@ -1,5 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class view_Request_1 extends StatefulWidget {
   @override
@@ -297,7 +298,17 @@ class _TileState extends State<Tile> {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: FlatButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/subCollab_1");
+                              Fluttertoast.showToast(
+                                  backgroundColor: Color(0xff48A1FF),
+                                  msg: "You've been added",
+                                  fontSize: 12,
+                                  textColor: Colors.white,
+                                  timeInSecForIosWeb: 1,
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM);
+                            },
                             child: Text(
                               "Approve",
                               style:
@@ -313,7 +324,17 @@ class _TileState extends State<Tile> {
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: FlatButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/subCollab_1");
+                              Fluttertoast.showToast(
+                                  backgroundColor: Colors.white,
+                                  msg: "You've declined",
+                                  fontSize: 12,
+                                  textColor: Color(0xff48A1FF),
+                                  timeInSecForIosWeb: 1,
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.BOTTOM);
+                            },
                             child: Text(
                               "Decline",
                               style: TextStyle(

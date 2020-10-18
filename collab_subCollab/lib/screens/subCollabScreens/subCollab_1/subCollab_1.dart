@@ -368,7 +368,7 @@ class _Sub_CollabsState extends State<Sub_Collabs>
                       SpeedDialChild(
                         elevation: 5,
                         onTap: () {
-                          Navigator.pushNamed(context, '/subcollab_2_3');
+                          Navigator.pushNamed(context, '/viewRequest_1');
                         },
                         label: "View Requests",
                         labelStyle: TextStyle(
@@ -388,7 +388,8 @@ class _Sub_CollabsState extends State<Sub_Collabs>
                       ),
                       SpeedDialChild(
                         elevation: 5,
-                        onTap: () {},
+                        onTap: () =>
+                            Navigator.pushNamed(context, "/subCollab_2_3"),
                         label: "Create Sub-Collab",
                         labelStyle: TextStyle(
                           fontSize: 15,
