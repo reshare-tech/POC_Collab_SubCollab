@@ -66,10 +66,17 @@ class _collab_6State extends State<collab_6> {
   }
 }
 
-class CC6 extends StatelessWidget {
+class CC6 extends StatefulWidget {
   const CC6({
     Key key,
   }) : super(key: key);
+
+  @override
+  _CC6State createState() => _CC6State();
+}
+
+class _CC6State extends State<CC6> {
+  bool search = false;
 
   @override
   Widget build(BuildContext context) {
@@ -88,65 +95,102 @@ class CC6 extends StatelessWidget {
                     colors: [Color(0xff0659ac), Color(0xff179ee6)],
                     stops: [0.26, 1])),
             padding: EdgeInsets.only(left: 20, right: 0, top: 16),
-            child: ListTile(
-              trailing: Container(
-                width: 100,
-                child: Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: SvgPicture.asset(
-                        "assets/images/search.svg",
-                        height: 20,
-                        width: 20,
+            child: search == false
+                ? ListTile(
+                    trailing: Container(
+                      width: 100,
+                      child: Row(
+                        children: <Widget>[
+                          IconButton(
+                            icon: SvgPicture.asset(
+                              "assets/images/search.svg",
+                              height: 20,
+                              width: 20,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                search = true;
+                              });
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.more_vert,
+                              color: Colors.white,
+                            ),
+                            iconSize: 30,
+                            onPressed: () {},
+                          ),
+                        ],
                       ),
-                      onPressed: () {},
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.more_vert,
-                        color: Colors.white,
+                    title: Transform(
+                      transform: Matrix4.translationValues(-30, 0, 0),
+                      child: Text(
+                        "Flutter Project",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
                       ),
-                      iconSize: 30,
-                      onPressed: () {},
                     ),
-                  ],
-                ),
-              ),
-              title: Transform(
-                transform: Matrix4.translationValues(-30, 0, 0),
-                child: Text(
-                  "Flutter Project",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-              contentPadding:
-                  EdgeInsets.only(top: 22, bottom: 0, left: 0, right: 0),
-              leading: Container(
-                width: 100,
-                child: Row(
-                  children: <Widget>[
-                    IconButton(
+                    contentPadding:
+                        EdgeInsets.only(top: 22, bottom: 0, left: 0, right: 0),
+                    leading: Container(
+                      width: 100,
+                      child: Row(
+                        children: <Widget>[
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              padding: EdgeInsets.only(right: 20),
+                              icon:
+                                  SvgPicture.asset("assets/images/Arrow.svg")),
+                          Transform(
+                            transform: Matrix4.translationValues(-15, 0, 0),
+                            child: Container(
+                              margin: EdgeInsets.only(left: 0),
+                              width: 40,
+                              height: 40,
+                              child:
+                                  Image.asset("assets/images/Rectangle 75.png"),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                : ListTile(
+                    contentPadding:
+                        EdgeInsets.only(top: 30, bottom: 0, left: 0, right: 0),
+                    leading: IconButton(
+                        iconSize: 28,
+                        constraints: BoxConstraints(maxWidth: 30),
                         onPressed: () {
-                          Navigator.pop(context);
+                          setState(() {
+                            search = false;
+                          });
                         },
                         padding: EdgeInsets.only(right: 20),
                         icon: SvgPicture.asset("assets/images/Arrow.svg")),
-                    Transform(
+                    title: Transform(
                       transform: Matrix4.translationValues(-15, 0, 0),
-                      child: Container(
-                        margin: EdgeInsets.only(left: 0),
-                        width: 40,
-                        height: 40,
-                        child: Image.asset("assets/images/Rectangle 75.png"),
+                      child: TextField(
+                        style: TextStyle(
+                          color: Colors.white,
+                          decoration: TextDecoration.none,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Search...",
+                          hintStyle: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ),
+                    ),
+                  ),
           ),
           Positioned(
             top: 106,

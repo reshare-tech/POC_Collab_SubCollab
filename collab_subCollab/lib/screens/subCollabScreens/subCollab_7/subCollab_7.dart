@@ -11,6 +11,7 @@ class SubCollab_7 extends StatefulWidget {
 }
 
 class _SubCollab_7State extends State<SubCollab_7> {
+  bool search = false;
   @override
   Widget build(BuildContext context) {
     List data = [
@@ -74,75 +75,119 @@ class _SubCollab_7State extends State<SubCollab_7> {
             constraints: BoxConstraints.expand(
                 height: height - kBottomNavigationBarHeight),
             decoration: BoxDecoration(color: Color(0xff3E73C1)),
-            child: Stack(
-              children: [
-                Positioned(
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        size: 15.37,
-                        color: Color(0xfffdfdfd),
+            padding: EdgeInsets.only(left: 20, right: 0, top: 16),
+            child: search == false
+                ? ListTile(
+                    trailing: Container(
+                      width: 100,
+                      child: Row(
+                        children: <Widget>[
+                          IconButton(
+                            icon: SvgPicture.asset(
+                              "assets/images/search.svg",
+                              height: 20,
+                              width: 20,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                search = true;
+                              });
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.more_vert,
+                              color: Colors.white,
+                            ),
+                            iconSize: 30,
+                            onPressed: () {},
+                          ),
+                        ],
                       ),
-                      onPressed: () => Navigator.pop(context)),
-                  top: 44,
-                  left: 16,
-                ),
-                Positioned(
-                  child: IconButton(
-                      icon: SvgPicture.asset(
-                        "assets/images/search.svg",
-                        color: Color(0xfffdfdfd),
+                    ),
+                    title: Transform(
+                      transform: Matrix4.translationValues(-15, 0, 0),
+                      child: Container(
+                        child: Text(
+                          "Dart",
+                          softWrap: false,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
+                        ),
                       ),
-                      onPressed: () {}),
-                  top: 44,
-                  right: 40,
-                ),
-                Positioned(
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.more_vert,
-                        color: Color(0xfffdfdfd),
+                    ),
+                    subtitle: Transform(
+                      transform: Matrix4.translationValues(-15, 0, 0),
+                      child: Text(
+                        "in “Face Detection project”",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600),
                       ),
-                      onPressed: () {}),
-                  top: 44,
-                  right: 0,
-                ),
-                Positioned(
-                  child: Container(
-                      child: Image.asset(
-                        "assets/images/head.jpg",
-                        fit: BoxFit.fitWidth,
+                    ),
+                    contentPadding:
+                        EdgeInsets.only(top: 22, bottom: 0, left: 0, right: 0),
+                    leading: Container(
+                      margin: EdgeInsets.all(0),
+                      constraints: BoxConstraints(maxWidth: 70),
+                      child: Row(
+                        children: <Widget>[
+                          IconButton(
+                              iconSize: 28,
+                              constraints: BoxConstraints(maxWidth: 30),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              padding: EdgeInsets.only(right: 20),
+                              icon:
+                                  SvgPicture.asset("assets/images/Arrow.svg")),
+                          Transform(
+                            transform: Matrix4.translationValues(-10, 0, 0),
+                            child: Container(
+                              margin: EdgeInsets.only(left: 0),
+                              width: 40,
+                              height: 40,
+                              child:
+                                  Image.asset("assets/images/Rectangle 75.png"),
+                            ),
+                          )
+                        ],
                       ),
-                      constraints: BoxConstraints.expand(height: 40, width: 40),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(5)))),
-                  top: 45,
-                  left: 55,
-                ),
-                Positioned(
-                  child: Text(
-                    "Dart",
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xfffdfdfd)),
+                    ),
+                  )
+                : ListTile(
+                    contentPadding:
+                        EdgeInsets.only(top: 30, bottom: 0, left: 0, right: 0),
+                    leading: IconButton(
+                        iconSize: 28,
+                        constraints: BoxConstraints(maxWidth: 30),
+                        onPressed: () {
+                          setState(() {
+                            search = false;
+                          });
+                        },
+                        padding: EdgeInsets.only(right: 20),
+                        icon: SvgPicture.asset("assets/images/Arrow.svg")),
+                    title: Transform(
+                      transform: Matrix4.translationValues(-15, 0, 0),
+                      child: TextField(
+                        style: TextStyle(
+                          color: Colors.white,
+                          decoration: TextDecoration.none,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Search...",
+                          hintStyle: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  left: 100,
-                  top: 45,
-                ),
-                Positioned(
-                  child: Text(
-                    "in “Face Detection project”",
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xfffdfdfd)),
-                  ),
-                  left: 100,
-                  top: 70,
-                )
-              ],
-            ),
           ),
           Positioned(
             child: Container(
