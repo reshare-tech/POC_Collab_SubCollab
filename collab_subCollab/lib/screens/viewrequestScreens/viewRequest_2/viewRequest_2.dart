@@ -12,6 +12,7 @@ class ViewRequest_2 extends StatefulWidget {
 }
 
 class _ViewRequest_2State extends State<ViewRequest_2> {
+  bool search = false;
   @override
   void initState() {
     super.initState();
@@ -75,51 +76,96 @@ class _ViewRequest_2State extends State<ViewRequest_2> {
             Container(
               child: Stack(
                 children: [
-                  Positioned(
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          size: 15.37,
-                          color: Color(0xfffdfdfd),
-                        ),
-                        onPressed: () => Navigator.pop(context)),
-                    top: 44,
-                    left: 16,
-                  ),
-                  Positioned(
-                    child: IconButton(
-                        icon: SvgPicture.asset(
-                          "assets/images/search.svg",
-                          color: Color(0xfffdfdfd),
-                        ),
-                        onPressed: () {}),
-                    top: 44,
-                    right: 40,
-                  ),
-                  Positioned(
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.more_vert,
-                          color: Color(0xfffdfdfd),
-                        ),
-                        onPressed: () {}),
-                    top: 44,
-                    right: 0,
-                  ),
-                  Positioned(
-                      top: 50,
-                      left: (width / 2 - 40),
-                      child: Container(
-                          constraints:
-                              BoxConstraints.expand(height: 80, width: 80),
-                          child: null,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fitWidth,
-                                image: AssetImage(
-                                  "assets/images/Rectangle 75.png",
-                                )),
-                          ))),
+                  search == true
+                      ? ListTile(
+                          contentPadding: EdgeInsets.only(
+                              top: 30, bottom: 0, left: 20, right: 0),
+                          leading: IconButton(
+                              iconSize: 28,
+                              constraints: BoxConstraints(maxWidth: 30),
+                              onPressed: () {
+                                setState(() {
+                                  search = false;
+                                });
+                              },
+                              padding: EdgeInsets.only(right: 20),
+                              icon:
+                                  SvgPicture.asset("assets/images/Arrow.svg")),
+                          title: Transform(
+                            transform: Matrix4.translationValues(-15, 0, 0),
+                            child: TextField(
+                              style: TextStyle(
+                                color: Colors.white,
+                                decoration: TextDecoration.none,
+                              ),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Search...",
+                                hintStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      : Text(""),
+                  search == false
+                      ? Positioned(
+                          child: IconButton(
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                size: 15.37,
+                                color: Color(0xfffdfdfd),
+                              ),
+                              onPressed: () => Navigator.pop(context)),
+                          top: 44,
+                          left: 16,
+                        )
+                      : Text(""),
+                  search == false
+                      ? Positioned(
+                          child: IconButton(
+                              icon: SvgPicture.asset(
+                                "assets/images/search.svg",
+                                color: Color(0xfffdfdfd),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  search = true;
+                                });
+                              }),
+                          top: 44,
+                          right: 40,
+                        )
+                      : Text(""),
+                  search == false
+                      ? Positioned(
+                          child: IconButton(
+                              icon: Icon(
+                                Icons.more_vert,
+                                color: Color(0xfffdfdfd),
+                              ),
+                              onPressed: () {}),
+                          top: 44,
+                          right: 0,
+                        )
+                      : Text(""),
+                  search == false
+                      ? Positioned(
+                          top: 50,
+                          left: (width / 2 - 40),
+                          child: Container(
+                              constraints:
+                                  BoxConstraints.expand(height: 80, width: 80),
+                              child: null,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.fitWidth,
+                                    image: AssetImage(
+                                      "assets/images/Rectangle 75.png",
+                                    )),
+                              )))
+                      : Text(""),
                   Positioned(
                       left: (width / 2 - 58),
                       top: 146,
