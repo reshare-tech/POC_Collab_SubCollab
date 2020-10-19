@@ -234,7 +234,7 @@ Widget CC5(BuildContext context, TextEditingController _textEditingController,
                               child: RaisedButton(
                                 color: Color(0xff0F4C81),
                                 onPressed: () {
-                                  sendEmail(_textEditingController.text);
+                                  sendEmail(_textEditingController.text,context);
                                   _textEditingController.clear();
                                 },
                                 child: Text("Add",
@@ -388,7 +388,8 @@ Widget CC5(BuildContext context, TextEditingController _textEditingController,
   );
 }
 
-void sendEmail(String email) async {
+
+void sendEmail(String email, BuildContext context) async {
   var httpClient = http.Client();
   var response = await httpClient.post(
       Uri.https("projectcollab-invite.herokuapp.com", "/inviteProjectCollab"),
@@ -400,6 +401,52 @@ void sendEmail(String email) async {
   if (response.statusCode == 200) {
     var message = jsonDecode(response.body);
     print(message['message']);
-  } else
+    toast(message['message'], true, context);
+  } else {
     print("Error with code ${response.statusCode}");
+    toast("Invitation was not sent", false, context);
+  }
 }
+
+toast(String message, bool success, BuildContext context) {
+  showDialog(
+    context: context,
+    barrierColor: Color.fromRGBO(0, 0, 0, 0.01),
+    builder: (context) {
+      return Container(
+          margin: EdgeInsets.only(top: 20),
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Material(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              elevation: 10,
+              child: Container(
+                padding:
+                    EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      child: success
+                          ? Icon(Icons.check_circle_outline, color: Colors.blue)
+                          : Icon(
+                              Icons.highlight_off,
+                              color: Colors.red,
+                              size: 25,
+                            ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(left: 10),
+                        child: Text(
+                          message,
+                          style: TextStyle(fontSize: 18),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+          ));
+    },
+  );
+}
+
