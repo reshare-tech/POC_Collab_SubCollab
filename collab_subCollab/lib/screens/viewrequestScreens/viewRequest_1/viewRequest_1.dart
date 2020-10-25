@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -81,6 +83,14 @@ class _Viewreq_1State extends State<Viewreq_1> {
     {"name": "Ashley Conan"},
   ];
   bool search = false;
+
+  void removeElement(String name) {
+    setState(() {
+      for (int i = 0; i < data.length; i++) {
+        if (data[i]["name"] == name) data.removeAt(i);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -230,7 +240,7 @@ class _Viewreq_1State extends State<Viewreq_1> {
                     child: ListView.separated(
                         padding: EdgeInsets.all(0),
                         itemBuilder: (context, i) {
-                          return Tile(data[i]["name"]);
+                          return Tile(data[i]["name"], context, removeElement);
                         },
                         separatorBuilder: (context, i) {
                           return Divider(
@@ -247,156 +257,145 @@ class _Viewreq_1State extends State<Viewreq_1> {
   }
 }
 
-class Tile extends StatefulWidget {
-  String name;
-  Tile(this.name);
-  @override
-  _TileState createState() => _TileState();
-}
-
-class _TileState extends State<Tile> {
-  @override
-  Widget build(BuildContext context) {
-    String name1 = widget.name;
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      width: MediaQuery.of(context).size.width,
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  width: 30,
-                  height: 30,
-                  child: Image.asset("assets/images/Rectangle 112.png"),
-                ),
-                Container(
-                  width: 10,
-                  height: 10,
-                  child: SvgPicture.asset("assets/images/downarrow.svg"),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  width: 30,
-                  height: 30,
-                  child: Image.asset("assets/images/Rectangle 75.png"),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 7,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, bottom: 5),
-                  child: Text(
-                    "The Flutter Team",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    "Request to create Subgroup",
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff3e3e3e)),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    "Request by “$name1”",
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff3e3e3e)),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 20, top: 10),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(right: 8),
-                        width: 82,
-                        height: 25,
-                        decoration: BoxDecoration(
-                          color: Color(0xff48a1ff),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: FlatButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/subCollab_1");
-                              Fluttertoast.showToast(
-                                  backgroundColor: Color(0xff48A1FF),
-                                  msg: "You've been added",
-                                  fontSize: 12,
-                                  textColor: Colors.white,
-                                  timeInSecForIosWeb: 1,
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM);
-                            },
-                            child: Text(
-                              "Approve",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12),
-                            )),
-                      ),
-                      Container(
-                        width: 82,
-                        height: 25,
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Color(0xff48a1ff), width: 1),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: FlatButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/subCollab_1");
-                              Fluttertoast.showToast(
-                                  backgroundColor: Colors.white,
-                                  msg: "You've declined",
-                                  fontSize: 12,
-                                  textColor: Color(0xff48A1FF),
-                                  timeInSecForIosWeb: 1,
-                                  toastLength: Toast.LENGTH_LONG,
-                                  gravity: ToastGravity.BOTTOM);
-                            },
-                            child: Text(
-                              "Decline",
-                              style: TextStyle(
-                                  color: Color(0xff48a1ff), fontSize: 12),
-                            )),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: FlatButton(
-              onPressed: () => Navigator.pushNamed(context, "/viewRequest_2"),
-              child: Text(
-                "View Details",
-                style: TextStyle(color: Color(0xff48a1ff), fontSize: 12),
+Widget Tile(String name1, BuildContext context, Function removeElement) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    width: MediaQuery.of(context).size.width,
+    child: Row(
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                width: 30,
+                height: 30,
+                child: Image.asset("assets/images/Rectangle 112.png"),
               ),
+              Container(
+                width: 10,
+                height: 10,
+                child: SvgPicture.asset("assets/images/downarrow.svg"),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                width: 30,
+                height: 30,
+                child: Image.asset("assets/images/Rectangle 75.png"),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 7,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 20, bottom: 5),
+                child: Text(
+                  "The Flutter Team",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  "Request to create Subgroup",
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff3e3e3e)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  "Request by “$name1”",
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff3e3e3e)),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20, top: 10),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(right: 8),
+                      width: 82,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        color: Color(0xff48a1ff),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: FlatButton(
+                          onPressed: () {
+                            removeElement(name1);
+
+                            Navigator.pushNamed(context, "/subCollab_1");
+                            Fluttertoast.showToast(
+                                backgroundColor: Color(0xff48A1FF),
+                                msg: "You've been added",
+                                fontSize: 12,
+                                textColor: Colors.white,
+                                timeInSecForIosWeb: 1,
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM);
+                          },
+                          child: Text(
+                            "Approve",
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          )),
+                    ),
+                    Container(
+                      width: 82,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xff48a1ff), width: 1),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: FlatButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/subCollab_1");
+                            Fluttertoast.showToast(
+                                backgroundColor: Colors.white,
+                                msg: "You've declined",
+                                fontSize: 12,
+                                textColor: Color(0xff48A1FF),
+                                timeInSecForIosWeb: 1,
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.BOTTOM);
+                          },
+                          child: Text(
+                            "Decline",
+                            style: TextStyle(
+                                color: Color(0xff48a1ff), fontSize: 12),
+                          )),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: FlatButton(
+            onPressed: () => Navigator.pushNamed(context, "/viewRequest_2"),
+            child: Text(
+              "View Details",
+              style: TextStyle(color: Color(0xff48a1ff), fontSize: 12),
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 }
