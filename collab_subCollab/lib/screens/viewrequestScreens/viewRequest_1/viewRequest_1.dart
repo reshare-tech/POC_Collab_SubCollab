@@ -363,6 +363,7 @@ Widget Tile(String name1, BuildContext context, Function removeElement) {
                       ),
                       child: FlatButton(
                           onPressed: () {
+                            removeElement(name1);
                             Navigator.pushNamed(context, "/subCollab_1");
                             Fluttertoast.showToast(
                                 backgroundColor: Colors.white,
