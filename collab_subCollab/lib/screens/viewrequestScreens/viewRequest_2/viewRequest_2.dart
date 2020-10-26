@@ -228,6 +228,7 @@ class _ViewRequest_2State extends State<ViewRequest_2> {
               padding: EdgeInsets.all(0),
             ),
             DraggableScrollableSheet(
+              expand: true,
                 initialChildSize: 0.4,
                 minChildSize: 0.4,
                 maxChildSize: 0.85,
@@ -334,6 +335,7 @@ class _ViewRequest_2State extends State<ViewRequest_2> {
                   );
                 }),
             Positioned(
+              
               top: 613 * height / 750,
               child: Container(
                 child: Stack(
@@ -426,7 +428,8 @@ class _ViewRequest_2State extends State<ViewRequest_2> {
                 ),
                 decoration: BoxDecoration(
                     boxShadow: [BoxShadow()],
-                    color: Color(0xfffdfdfd),
+                    // color: Color(0xfffdfdfd),
+                    color: Colors.red,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10))),

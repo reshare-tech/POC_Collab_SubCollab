@@ -234,7 +234,8 @@ Widget CC5(BuildContext context, TextEditingController _textEditingController,
                               child: RaisedButton(
                                 color: Color(0xff0F4C81),
                                 onPressed: () {
-                                  sendEmail(_textEditingController.text,context);
+                                  sendEmail(
+                                      _textEditingController.text, context);
                                   _textEditingController.clear();
                                 },
                                 child: Text("Add",
@@ -388,7 +389,6 @@ Widget CC5(BuildContext context, TextEditingController _textEditingController,
   );
 }
 
-
 void sendEmail(String email, BuildContext context) async {
   var httpClient = http.Client();
   var response = await httpClient.post(
@@ -411,8 +411,12 @@ void sendEmail(String email, BuildContext context) async {
 toast(String message, bool success, BuildContext context) {
   showDialog(
     context: context,
+    barrierDismissible: false,
     barrierColor: Color.fromRGBO(0, 0, 0, 0.01),
     builder: (context) {
+      Future.delayed(Duration(seconds: 3), () => {
+        Navigator.of(context).pop(true)
+      });
       return Container(
           margin: EdgeInsets.only(top: 20),
           child: Align(
@@ -449,4 +453,3 @@ toast(String message, bool success, BuildContext context) {
     },
   );
 }
-

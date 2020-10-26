@@ -63,7 +63,7 @@ class _MyAppState extends State<MyAppStateful> {
         Map<String, String> parameters = deeplink.queryParameters;
         print("Deeplink clicked:" + deeplink.toString());
         print("route : " + parameters["route"]);
-        Navigator.popAndPushNamed(context, parameters["route"]);
+        Navigator.pushNamed(context, parameters["route"]);
       } else {
         setState(() {
           deeplinkStatus = "notReceived";
@@ -106,7 +106,7 @@ Widget buildChild(String deeplinkStatus) {
   if (deeplinkStatus.compareTo("received") == 0)
     return CircularProgressIndicator();
   else if (deeplinkStatus.compareTo("notReceived") == 0)
-    return subCollab_1();
+    return collab_2_3();
   else
     return CircularProgressIndicator();
 }
