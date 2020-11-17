@@ -5,7 +5,7 @@
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const Chat=require('./models/ChatSchema');
+const Chat=require('./models/ChatSchema'); 
 const UserToGroup=require('./models/UserToGroupSchema');
 const connect=require('./dbconnection');
 const events = require('./constants');
@@ -180,13 +180,14 @@ const disposeOnDisconnect = (socket,roomID) => {
 }
 app.get("/groupChats",function(req,res){
     connect.then(db => {
-        Chat.find({isGroup:true,receiverChatID:"999"},function (err, chats) {
+        Chat.find({isGroup:true,receiverChatID:req.query.groupID},function (err, chats) {
             //need to get in params,receiverchat id  and groupid and userid
             //should sep into GROUP CHAT SCHEMA TOO
             if (err)  console.log("group chats err");
             else{
-            
-            console.log(chats); 
+            console.log(req.query);
+            console.log(req.query.groupID);
+            // console.log(chats); 
             // io.sockets.in(to_id).emit('receive_message', chats);
             // io.sockets.in(from_id).emit('receive_message', chats);
             res.send(chats);
@@ -199,15 +200,17 @@ app.get("/groupChats",function(req,res){
 app.get("/individualChats",function(req,res){
     connect.then(db=>{
         console.log("connected to db inside return individualschats' list");
-        let from_id="2002";//req.body.senderChatID
-        let to_id="1001";//req.body.receiverChatID
+        console.log(req.query.senderChatID);
+        console.log(req.query.receiverChatID);
+        let from_id=req.query.senderChatID;
+        let to_id=req.query.receiverChatID;
  
         Chat.find({$or:[{$and:[{"senderChatID":from_id},{"receiverChatID":to_id}]},{$and:[{"senderChatID":to_id},{"receiverChatID":from_id}]}]},function (err, chats) {
  
             if (err)  console.log(err);
             else{
             
-            console.log(chats); 
+            // console.log(chats); 
             // io.sockets.in(to_id).emit('receive_message', chats);
             // io.sockets.in(from_id).emit('receive_message', chats);
             res.send(chats);
