@@ -26,17 +26,32 @@ class _ChatPageState extends State<ChatPage> {
   String content;
   String roomID;
   List<Message> localMessages;
+  ChatHistory instance;
 
   _ChatPageState();
 
   Future<void> setupChats() async {
     try {
-      ChatHistory instance = ChatHistory(
-        senderID: Global.loggedInUser.userID,
-        recipientID: this.roomID,
-      );
+      // instance = ChatHistory(
+      //   senderID: Global.loggedInUser.userID,
+      //   recipientID: Global.toChatUser.userID,
+      // );
 
-      await instance.getChats();
+      // await instance.getChats();
+      if (widget.isGroup == true) {
+        instance = ChatHistory(
+          groupID: Global.toGroup.groupID,
+        );
+
+        await instance.getGroupChats();
+      } else {
+        instance = ChatHistory(
+          senderID: Global.loggedInUser.userID,
+          recipientID: this.roomID,
+        );
+
+        await instance.getIndividualChats();
+      }
 
       if (mounted)
         setState(() {

@@ -23,7 +23,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   _MainPageState({this.category});
 
   setLoggedInUser() async {
-    Global.loggedInUser = Global.dummyUsers[1];
+    Global.loggedInUser = Global.dummyUsers[5];
     Global.toChatUser = Global.dummyUsers[0];
     Global.toGroup = Global.dummyGroups[0];
   }
@@ -80,6 +80,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         child: TabBarView(
           children: [
             ChatList(category: category),
+            //change to true to test group chats, false to test individual chats
             ChatPage(isGroup: true),
             Center(child: Text('This is the Plugins tab')),
           ],
